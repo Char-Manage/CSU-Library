@@ -28,6 +28,7 @@ jobs:
         pwd='${{ secrets.PWD }}'
         python3 helper.py --userid $user --password $pwd
     - name: Commit
+      if: always()
       run: |
         git config --global user.email founder.yu@foxmail.com
         git config --global user.name founder-yu
@@ -35,5 +36,6 @@ jobs:
         git commit -m "Update library.log" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
+      if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
