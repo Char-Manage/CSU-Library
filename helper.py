@@ -104,9 +104,9 @@ class CSULibrary(object):
            'access_token']
 
        now = datetime.now()
-       targetTime = datetime(2022, 10, 30, 22, 0)
+       targetTime = datetime(2022, 10, 30, 22, 0, 1)
        timedelta = (targetTime - now).seconds
-       if timedelta > 1000:
+       if timedelta > 1800:
            print("TIME OUT! NO SLEEP")
        else:
            print("sleep  :"+str(timedelta))
@@ -126,10 +126,10 @@ class CSULibrary(object):
                'operateChannel': '2'
            }
            response = self.client.post(url, headers=headers, data=data)
+           logging.info(response.json()['msg'])
            if response.json()['status'] == 1:
                break
 
-       logging.info(response.json()['msg'])
        if response.json()['status'] == 0:
            raise Exception(response.json()['msg'])
 
